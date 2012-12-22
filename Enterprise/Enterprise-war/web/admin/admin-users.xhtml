@@ -1,12 +1,82 @@
 <?xml version='1.0' encoding='UTF-8' ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-    </h:body>
-</html>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui">
 
+    <body>
+
+        <ui:composition template="./admin.xhtml">
+
+            <ui:define name="center">
+                <h2>Пользователи</h2>                                    
+
+
+
+
+                <p:growl id="growl" showDetail="true"  />  
+
+
+                <p:dialog id="createDialog" style="z-index: 10000000"  widgetVar="createDialog" header="Добавить водителя" >
+                    <p:ajax event="close" update="createDialog" />
+                    
+                    <p:panelGrid columns="2" style="border: 0" >  
+
+                        <h:outputLabel for="login" value="Логин:" />  
+                        <p:inputText id="login" value="#{adminUsers.username}" requiredMessage="Выберите логин"/>  
+
+                        <h:outputLabel for="password" value="Пароль:" />  
+                        <p:inputText id="password" value="#{adminUsers.password}" requiredMessage="Выберите пароль"/>  
+
+                        <h:outputLabel for="name" value="Ф.И.О.:" />  
+                        <p:inputText id="name" value="#{adminUsers.name}" requiredMessage="Не заполнены Ф.И.О."/>  
+
+                        <h:outputLabel for="role" value="Роль:" />  
+                        <p:inputText id="role" value="#{adminUsers.role}" requiredMessage="Не заполнена роль"/>  
+
+                        <f:facet name="footer">  
+                            <p:commandButton value="Сохранить" action="#{adminUsers.createUser()}" update="growl,availableUsers" />
+                        </f:facet>  
+                    </p:panelGrid>
+                </p:dialog>
+
+
+                <p:commandButton value ="Добавить" onclick="createDialog.show()" /> <br/>
+
+                <p:dataTable id="availableUsers" value="#{adminUsers.usersList }"  var="user" style="border: none" emptyMessage="Нет данных" >  
+                    
+                    <p:column headerText="Логин" >  
+                        <h:outputLabel value="#{user.username}" />                                    
+                    </p:column>                      
+                    
+                    <p:column headerText="Пароль" >  
+                        <h:outputLabel value="#{user.password}" />                                    
+                    </p:column>                      
+                    
+                    <p:column headerText="Ф.И.О." >  
+                        <h:outputLabel value="#{user.name}" />                                    
+                    </p:column>      
+                    
+                    <p:column headerText="Роль" >  
+                        <h:outputLabel value="#{user.role}" />                                    
+                    </p:column>      
+                    
+                    <p:column headerText="Действия" rendered="false" >  
+                        <p:confirmDialog appendToBody="true" id="confirmDialog" message="Вы действительно хотите удалить пользователя #{adminUsers.selectedUser}?" widgetVar="confirmation" header="Подтверждение">
+                            <p:commandButton value="Да" action="#{adminUsers.removeUser(adminUsers.selectedUser)}" onclick="confirmation.hide()" />
+                            <p:commandButton value="Нет" onclick="confirmation.hide()" />
+                        </p:confirmDialog>
+                        <p:commandButton value="Удалить" oncomplete="confirmation.show()" update=":form:display" >
+                            <f:setPropertyActionListener value="#{user}" target="#{adminUsers.selectedUser}" /> 
+                        </p:commandButton>
+                    </p:column>  
+                </p:dataTable>  
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

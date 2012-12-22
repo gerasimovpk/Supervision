@@ -25,6 +25,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name"),
     @NamedQuery(name = "Users.findByUserId", query = "SELECT u FROM Users u WHERE u.userId = :userId")})
 public class Users implements Serializable {
+    @Size(max = 255)
+    @Column(name = "ROLE")
+    private String role;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -104,6 +107,14 @@ public class Users implements Serializable {
     @Override
     public String toString() {
         return "ru.isim.enterprise.rsubd.entities.Users[ username=" + username + " ]";
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
     
 }
