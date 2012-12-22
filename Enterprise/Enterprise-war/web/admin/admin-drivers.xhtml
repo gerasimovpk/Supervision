@@ -1,12 +1,83 @@
-<?xml version='1.0' encoding='CP1251' ?>
+<?xml version='1.0' encoding='UTF-8' ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets�������������������������
-    </h:body>
-</html>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui">
 
+    <body>
+
+        <ui:composition template="./admin.xhtml">
+
+            <ui:define name="center">
+                <h2>Водители</h2>                                    
+
+
+
+
+                <p:growl id="growl" showDetail="true"  />  
+
+
+                <p:dialog id="createDialog" style="z-index: 10000000"  widgetVar="createDialog" header="Добавить ОТК" >
+                    <p:ajax event="close" update="createDialog" />
+                    
+                    <p:panelGrid columns="2" style="border: 0" >  
+
+                        <h:outputLabel for="atid" value="Код АТ:" />  
+                        <p:inputText id="atid" value="#{adminTCO.atId}" requiredMessage="Не заполнен код АТ"/>  
+
+                        <h:outputLabel for="stateNum" value="ГРЗ:" />  
+                        <p:inputText id="stateNum" value="#{adminTCO.stateNumber}" required="true" requiredMessage="Не заполнен код ГРЗ"  />  
+
+                        <h:outputLabel for="mark" value="Марка:" />  
+                        <p:inputText id="mark" value="#{adminTCO.mark}" required="true" requiredMessage="Не заполнена Марка ТС"/>  
+
+                        <h:outputLabel for="model" value="Модель:" />  
+                        <p:inputText id="model" value="#{adminTCO.model}" required="true" requiredMessage="Не заполнена модель ТС"/>  
+
+                        <h:outputLabel for="weight" value="Грузоподъемность:" />  
+                        <p:inputText id="weight" value="#{adminTCO.weight}" required="true" converterMessage="213" requiredMessage="Не заполнена грузоподъемность"/>  
+
+                        <f:facet name="footer">  
+                            <p:commandButton value="Сохранить" action="#{adminTCO.createTco}" update="growl,availableVehicles" />
+                        </f:facet>  
+                    </p:panelGrid>
+                </p:dialog>
+
+
+                <p:commandButton value ="Добавить" onclick="createDialog.show()" /> <br/>
+
+                <p:dataTable id="availableVehicles" value="#{adminTCO.tcoList}"  var="tco" style="border: none" emptyMessage="Нет данных" >  
+                    <p:column headerText="Номер АТ" >  
+                        <h:outputLabel value="#{tco.atId}" />                                    
+                    </p:column>  
+                    <p:column headerText="ГРЗ">  
+                        <h:outputLabel  value="#{tco.stateNumber}" />                                    
+                    </p:column>  
+                    <p:column headerText="Марка">  
+                        <h:outputLabel  value="#{tco.mark}" />                                    
+                    </p:column>  
+                    <p:column headerText="Модель">  
+                        <h:outputLabel  value="#{tco.model}" />                                    
+                    </p:column>  
+                    <p:column headerText="Грузоподъемность">  
+                        <h:outputLabel  value="#{tco.weight}" />                                    
+                    </p:column>  
+                    <p:column headerText="Действия" rendered="false" >  
+                        <p:confirmDialog appendToBody="true" id="confirmDialog" message="Вы действительно хотите удалить ОТК #{adminTCO.selectedTco}?" widgetVar="confirmation" header="Подтверждение">
+                            <p:commandButton value="Да" action="#{adminTCO.removeTco(adminTCO.selectedTco)}" onclick="confirmation.hide()" />
+                            <p:commandButton value="Нет" onclick="confirmation.hide()" />
+                        </p:confirmDialog>
+                        <p:commandButton value="Удалить" oncomplete="confirmation.show()" update=":form:display" >
+                            <f:setPropertyActionListener value="#{tco}" target="#{adminTCO.selectedTco}" /> 
+                        </p:commandButton>
+                    </p:column>  
+                </p:dataTable>  
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

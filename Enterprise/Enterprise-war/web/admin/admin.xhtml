@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='CP1251' ?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -9,7 +9,7 @@
         <ui:composition template="../masterTemplate.xhtml">
 
             <ui:define name="head">
-                <title> Администратор КПОГ </title>
+                <title> РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂ РљРџРћР“ </title>
                 <ui:insert name="headInfo" >
                     info
                 </ui:insert>
@@ -17,16 +17,16 @@
 
             <ui:define name="left">
                 <p:menu  >
-                    <p:submenu label="Инфраструктура">
-                        <p:menuitem value="Водители" action="./admin-drivers.xhtml" ajax="false"/>
-                        <p:menuitem value="ОТК" action="./admin-tco.xhtml" ajax="false"/>
+                    <p:submenu label="РРЅС„СЂР°СЃС‚СЂСѓРєС‚СѓСЂР°">
+                        <p:menuitem value="Р’РѕРґРёС‚РµР»Рё" action="./admin-drivers.xhtml" ajax="false"/>
+                        <p:menuitem value="РћРўРљ" action="./admin-tco.xhtml" ajax="false"/>
                     </p:submenu>    
-                    <p:submenu label="Пользователи">
-                        <p:menuitem value="Управление" action="./admin-users.xhtml" ajax="false"/>
+                    <p:submenu label="РџРѕР»СЊР·РѕРІР°С‚РµР»Рё">
+                        <p:menuitem value="РЈРїСЂР°РІР»РµРЅРёРµ" action="./admin-users.xhtml" ajax="false"/>
                     </p:submenu>    
-                    <p:submenu label="Разное" style="display: none" >
-                        <p:menuitem value="Настройки предприятия" style="display: none" action="./admin-settings.xhtml" ajax="false"/>
-                        <p:menuitem value="Логи" action="./admin-logs.xhtml"  style="display: none" ajax="false"/>
+                    <p:submenu label="Р Р°Р·РЅРѕРµ" style="display: none" >
+                        <p:menuitem value="РќР°СЃС‚СЂРѕР№РєРё РїСЂРµРґРїСЂРёСЏС‚РёСЏ" style="display: none" action="./admin-settings.xhtml" ajax="false"/>
+                        <p:menuitem value="Р›РѕРіРё" action="./admin-logs.xhtml"  style="display: none" ajax="false"/>
                     </p:submenu>    
                 </p:menu>
             </ui:define>
