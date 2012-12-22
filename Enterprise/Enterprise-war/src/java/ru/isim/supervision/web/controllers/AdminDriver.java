@@ -77,7 +77,7 @@ public class AdminDriver {
             context.addMessage(null, new FacesMessage("Сохранение", "Водитель \"" + this.name + "\" успешно сохранен"));
             driversList = driverFacade.findAll();
         } catch (Exception e) {
-            context.addMessage(null, new FacesMessage("Ошибка", "Произошла ошибка при сохранении водителя"));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка", "Произошла ошибка сервера при сохранении водителя"));
         }
     }
 

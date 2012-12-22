@@ -118,17 +118,11 @@ public class AdminTCO {
         tco.setWeight(this.weight);
         try {
             tcoFacade.create(tco);
-            context.addMessage(null, new FacesMessage("Сохранение", "ОТК \"" + this.stateNumber + "\" успешно сохранен"));
+            context.addMessage(null, new FacesMessage("Сохранение", "ОТК \"" + this.stateNumber + "\" успешно сохранено"));
             tcoList = tcoFacade.findAll();
         } catch (Exception e) {
-            context.addMessage(null, new FacesMessage("Ошибка", "Произошла ошибка при сохранении ОТК"));
-        } finally {
-            atId = "";
-            stateNumber = "";
-            mark = "";
-            model = "";
-            weight = null;
-        }
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка", "Произошла ошибка сервера при сохранении ОТК"));
+        } 
     }
 
     public void removeTco(Tco tco) {

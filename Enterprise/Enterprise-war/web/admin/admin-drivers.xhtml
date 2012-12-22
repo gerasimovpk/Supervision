@@ -25,11 +25,11 @@
                     
                     <p:panelGrid columns="2" style="border: 0" >  
 
-                        <h:outputLabel for="atid" value="Ф.И.О.:" />  
-                        <p:inputText id="atid" value="#{adminDriver.name}" requiredMessage="Не заполнены Ф.И.О."/>  
+                        <h:outputLabel for="name" value="Ф.И.О.:" />  
+                        <p:inputText id="name" value="#{adminDriver.name}" requiredMessage="Не заполнены Ф.И.О."/>  
 
                         <f:facet name="footer">  
-                            <p:commandButton value="Сохранить" action="#{adminDriver.createDriver()}" update="growl,availableVehicles" />
+                            <p:commandButton value="Сохранить" action="#{adminDriver.createDriver()}" update="growl,availableDrivers" />
                         </f:facet>  
                     </p:panelGrid>
                 </p:dialog>
@@ -37,7 +37,7 @@
 
                 <p:commandButton value ="Добавить" onclick="createDialog.show()" /> <br/>
 
-                <p:dataTable id="availableVehicles" value="#{adminDriver.driversList }"  var="driver" style="border: none" emptyMessage="Нет данных" >  
+                <p:dataTable id="availableDrivers" value="#{adminDriver.driversList }"  var="driver" style="border: none" emptyMessage="Нет данных" >  
                     <p:column headerText="Ф.И.О." >  
                         <h:outputLabel value="#{driver.name }" />                                    
                     </p:column>                      

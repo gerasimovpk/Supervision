@@ -38,7 +38,7 @@
                         <p:inputText id="model" value="#{adminTCO.model}" required="true" requiredMessage="Не заполнена модель ТС"/>  
 
                         <h:outputLabel for="weight" value="Грузоподъемность:" />  
-                        <p:inputText id="weight" value="#{adminTCO.weight}" required="true" converterMessage="213" requiredMessage="Не заполнена грузоподъемность"/>  
+                        <p:inputText id="weight" value="#{adminTCO.weight}" required="true"  converterMessage="Грузоподъемность должна быть выражена числом" requiredMessage="Не заполнена грузоподъемность"/>  
 
                         <f:facet name="footer">  
                             <p:commandButton value="Сохранить" action="#{adminTCO.createTco}" update="growl,availableVehicles" />
