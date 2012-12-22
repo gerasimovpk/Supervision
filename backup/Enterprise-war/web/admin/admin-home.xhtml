@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <body>
+
+        <ui:composition template="./admin.xhtml">
+
+            <ui:define name="center">
+                <h2>Добро пожаловать#{userManager.username!=null ? ", " : ""}
+                    #{userManager.username!=null ? userManager.username : ""}!</h2>
+                На данный момент под Вашим наблюдением 
+                #{adminUserMgr.users.size()==0 ? 
+                  " не находится " : " находятся "}
+                <a href="./admin/admin-users.xhtml">
+                    #{adminUserMgr.users.size()==0 ? 
+                      " ни одного пользователя" : adminUserMgr.users.size()}
+                    #{adminUserMgr.users.size()==0 ? 
+                      "" : " пользователей"}</a>
+                и
+                <a href="./admin/admin-vehicles.xhtml">
+                    #{adminController.totalVehicles==0 ? 
+                      " ни одного " : adminController.totalVehicles} 
+                </a>
+                ТС
+                
+                <br/>
+                #{adminController.regRequestCount==0 ? 
+                  "У вас не имеется " : "У вас имеется " }
+                <a href="./admin/admin-regRequests.xhtml">
+                    #{adminController.regRequestCount==0 ? 
+                      "" : adminController.regRequestCount}
+                    необработанных заявок</a> на регистрацию
+                    
+                <h3>Приятного Вам рабочего дня!</h3>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

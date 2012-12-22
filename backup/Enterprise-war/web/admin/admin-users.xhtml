@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./admin.xhtml">
+
+            <ui:define name="center">
+                <h2>Пользователи</h2>
+                <p:dataTable id="users" var="user" value="#{adminUserMgr.users}"
+                             paginator="true"
+                             editable="true"
+                             >  
+
+
+                    <p:column headerText="Фамилия" >  
+                        <h:outputText value="#{user.lname}" />     
+                    </p:column>  
+
+                    <p:column headerText="Имя">  
+                        <h:outputText value="#{user.fname}" />  
+                    </p:column>  
+
+                    <p:column headerText="Отчество">  
+                        <h:outputText value="#{user.mname}" />  
+                    </p:column>  
+
+                    <p:column headerText="Логин">  
+                        <h:outputText value="#{user.login}" />  
+                    </p:column>  
+
+                    <p:column headerText="Пароль">  
+                        <h:outputText value="#{user.password}" />  
+                    </p:column>  
+
+                    <p:column headerText="Организация" >  
+                        <h:outputText value="#{user.org}" />     
+                    </p:column>  
+
+                    <p:column headerText="Роль" >  
+                        <h:outputText value="#{user.role}" />     
+                    </p:column>  
+                    
+                    <p:column headerText="Почтовый адрес">  
+                        <h:outputText value="#{user.email}" /> 
+                    </p:column>  
+                    
+                    <p:column headerText="Наличие доступа к системе">  
+                        <p:selectBooleanCheckbox disabled="true" value="#{user.active}"/>
+                    </p:column>  
+
+                </p:dataTable>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

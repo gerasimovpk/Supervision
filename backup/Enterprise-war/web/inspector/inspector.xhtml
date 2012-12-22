@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+        <ui:composition template="/./masterTemplate.xhtml">
+
+            <ui:define name="head">
+
+                <ui:insert name="headParams" >
+                    params
+                </ui:insert>
+                <title> Диспетчер КСУТП #{userManager.username!=null ? " - " : ""}
+                    #{userManager.username!=null ? userManager.username : ""} </title>
+            </ui:define>
+
+            <ui:define name="left">
+                <p:menu style="width: 95%">
+                    <p:submenu label="Мониторинг ТС" >
+                        <p:menuitem value="Карта#{dispMap.getVehiclesString()}" action="./dispatcher-map.xhtml" ajax="false"/>
+                    </p:submenu>
+
+                    <p:submenu label="Перевозки">
+                        <p:menuitem value="Создать" action="./dispatcher-createTrip.xhtml" ajax="false"/>
+                        <p:menuitem value="Заявки#{dispatcherController.getRequestsString()}" action="./dispatcher-tripRequests.xhtml" ajax="false"/>
+                        <p:menuitem value="Активные перевозки#{dispatcherController.getTripsString()}" action="./dispatcher-activeTrips.xhtml" ajax="false"/>
+                    </p:submenu>
+
+                    <p:submenu label="Отчеты">
+                        <p:menuitem value="Движение ОТК" action="./dispatcher-report-run.xhtml" ajax="false"/>
+                        <p:menuitem value="Движение ГСМ" action="./dispatcher-report-fuel.xhtml" ajax="false"/>
+                    </p:submenu>
+                    
+                </p:menu>
+            </ui:define>
+
+            <ui:define name="center">
+                <ui:insert name="center" >
+                    This fullPage layout consists of five different layoutUnits which are resizable and closable by default.
+                </ui:insert>
+            </ui:define>
+
+        </ui:composition>
+
+</html>
+

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./admin.xhtml">
+
+            <ui:define name="center">
+                <h2>Водители</h2>
+                <p:dataTable id="drivers" var="driver" value="#{adminDrivers.drivers}"
+                             paginator="true"
+                             editable="true"
+                             >  
+
+
+                    <p:column headerText="Фамилия" >  
+                        <h:outputText value="#{driver.lname}" />     
+                    </p:column>  
+
+                    <p:column headerText="Имя">  
+                        <h:outputText value="#{driver.fname}" />  
+                    </p:column>  
+
+                    <p:column headerText="Отчество">  
+                        <h:outputText value="#{driver.mname}" />  
+                    </p:column>  
+
+                </p:dataTable>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

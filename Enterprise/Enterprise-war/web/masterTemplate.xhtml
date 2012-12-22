@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>     
+        <ui:insert name="head" >
+            This fullPage layout consists of five different layoutUnits which are resizable and closable by default.
+        </ui:insert>
+        <h:outputStylesheet name="resources/css/default.css" />
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form id="form">
+                <p:layout fullPage="true" id="masterLayout">
+
+                    <p:layoutUnit position="north" resizable="true" >
+                        <p:toolbar >
+
+                            <p:toolbarGroup align="left"   >  
+                                <table>
+                                    <tr valign="center">
+                                        <td>
+                                            <p:graphicImage value="http://images.vector-images.com/104/e410_mintrans.gif" width="40px" height="40px" />
+                                        </td>
+                                        <td>
+                                            <h:outputLabel value='Контроль перевозок опасных грузов' />
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </p:toolbarGroup>  
+                            <p:toolbarGroup align="right">  
+                                <table>
+                                    <tr valign="center">
+                                        <td>
+                                            <p:commandLink value="Выход" action="/login.xhtml" ajax="false" />                                            
+                                        </td>
+                                    </tr>
+                                </table> 
+                            </p:toolbarGroup>  
+                        </p:toolbar>  
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="south" height="25" style="text-align: right">
+                        <p:toolbar style="height: 23px; padding: 5px">  
+                            <p:toolbarGroup align="right">  
+                                <a href="mailto:gerasimov.pk@gmail.com">Pavel Gerasimov</a> © 2012
+                            </p:toolbarGroup>  
+
+                        </p:toolbar>  
+
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="west" width="200" minWidth="200" header="Меню" resizable="true"  style="height: 35px; padding: 5px">
+                        <ui:insert name="left" >
+                            This fullPage layout consists of five different layoutUnits which are resizable and closable by default.
+                        </ui:insert>
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="center" style="height: 35px; padding: 10px">
+                        <ui:insert name="center" >
+                            This fullPage layout consists of five different layoutUnits which are resizable and closable by default.
+                        </ui:insert>
+
+                    </p:layoutUnit>
+                    
+                </p:layout>
+            </h:form>
+        </f:view>   
+    </h:body>
+
+</html>

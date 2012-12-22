@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./admin.xhtml">
+
+            <ui:define name="headInfo">
+                <script type="text/javascript">
+                    function handleDrop(event, ui) {
+                        ui.draggable.fadeOut(function() {$(this).fadeIn();});
+
+                        $(this).droppable('disable');
+                    }
+                </script>
+
+            </ui:define>
+
+            <ui:define name="center">
+                <h2>Объекты телематического контроля</h2>
+                <p:panelGrid columns="2">
+                    <p:panel header="Доступные абонентские терминалы">  
+                        <p:dataGrid id="availableAT" value="#{adminOTC.atList}" var="at" columns="1">  
+                            <p:column>  
+                                <h:outputText id="at" value="#{at}" />
+                                <p:draggable for="at" revert="true" />  
+                            </p:column>  
+                        </p:dataGrid>  
+                    </p:panel> 
+                    <p:panel header="Транспортные средства">  
+                        <p:dataGrid id="availableVehicles" value="#{adminOTC.tsList}" var="ts" columns="1" style="border: none">  
+                            <p:column>  
+                                <p:panelGrid columns="3">
+                                    <h:outputLabel for="atHolder" value="#{ts}" />
+                                    <p:outputPanel id="atHolder" styleClass="slot">  
+                                        <p:droppable  tolerance="fit" activeStyleClass="slotActive" />  
+                                    </p:outputPanel>
+                                    <p:commandButton value="Установить связь" />
+                                </p:panelGrid>
+                            </p:column>  
+                        </p:dataGrid>  
+                    </p:panel>
+                </p:panelGrid>
+
+                <p:panel header="Активные ОТК">  
+                    <p:dataTable id="otcList" var="otc" value="#{adminOTC.otcList}"
+                                 paginator="true"
+                                 editable="true"
+                                 >  
+
+
+                        <p:column headerText="АТ" >  
+                            <h:outputText value="#{otc.at}" />     
+                        </p:column>  
+
+                        <p:column headerText="ТС" >  
+                            <h:outputText value="#{otc.ts}" />  
+                        </p:column>  
+                        
+                        <p:column >  
+                            <p:commandButton value="Разорвать связь" />
+                        </p:column>  
+
+
+                    </p:dataTable>
+                </p:panel>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

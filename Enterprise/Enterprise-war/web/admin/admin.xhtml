@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="../masterTemplate.xhtml">
+
+            <ui:define name="head">
+                <title> Администратор КПОГ </title>
+                <ui:insert name="headInfo" >
+                    info
+                </ui:insert>
+            </ui:define>
+
+            <ui:define name="left">
+                <p:menu  >
+                    <p:submenu label="Инфраструктура">
+                        <p:menuitem value="Водители" action="./admin-drivers.xhtml" ajax="false"/>
+                        <p:menuitem value="ОТК" action="./admin-tco.xhtml" ajax="false"/>
+                    </p:submenu>    
+                    <p:submenu label="Пользователи">
+                        <p:menuitem value="Управление" action="./admin-users.xhtml" ajax="false"/>
+                    </p:submenu>    
+                    <p:submenu label="Разное" style="display: none" >
+                        <p:menuitem value="Настройки предприятия" style="display: none" action="./admin-settings.xhtml" ajax="false"/>
+                        <p:menuitem value="Логи" action="./admin-logs.xhtml"  style="display: none" ajax="false"/>
+                    </p:submenu>    
+                </p:menu>
+            </ui:define>
+
+            <ui:define name="center">
+                <ui:insert name="center" >
+                    This fullPage layout consists of five different layoutUnits which are resizable and closable by default.
+                </ui:insert>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
