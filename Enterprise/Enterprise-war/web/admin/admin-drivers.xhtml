@@ -20,28 +20,16 @@
                 <p:growl id="growl" showDetail="true"  />  
 
 
-                <p:dialog id="createDialog" style="z-index: 10000000"  widgetVar="createDialog" header="Добавить ОТК" >
+                <p:dialog id="createDialog" style="z-index: 10000000"  widgetVar="createDialog" header="Добавить водителя" >
                     <p:ajax event="close" update="createDialog" />
                     
                     <p:panelGrid columns="2" style="border: 0" >  
 
-                        <h:outputLabel for="atid" value="Код АТ:" />  
-                        <p:inputText id="atid" value="#{adminTCO.atId}" requiredMessage="Не заполнен код АТ"/>  
-
-                        <h:outputLabel for="stateNum" value="ГРЗ:" />  
-                        <p:inputText id="stateNum" value="#{adminTCO.stateNumber}" required="true" requiredMessage="Не заполнен код ГРЗ"  />  
-
-                        <h:outputLabel for="mark" value="Марка:" />  
-                        <p:inputText id="mark" value="#{adminTCO.mark}" required="true" requiredMessage="Не заполнена Марка ТС"/>  
-
-                        <h:outputLabel for="model" value="Модель:" />  
-                        <p:inputText id="model" value="#{adminTCO.model}" required="true" requiredMessage="Не заполнена модель ТС"/>  
-
-                        <h:outputLabel for="weight" value="Грузоподъемность:" />  
-                        <p:inputText id="weight" value="#{adminTCO.weight}" required="true" converterMessage="213" requiredMessage="Не заполнена грузоподъемность"/>  
+                        <h:outputLabel for="atid" value="Ф.И.О.:" />  
+                        <p:inputText id="atid" value="#{adminDriver.name}" requiredMessage="Не заполнены Ф.И.О."/>  
 
                         <f:facet name="footer">  
-                            <p:commandButton value="Сохранить" action="#{adminTCO.createTco}" update="growl,availableVehicles" />
+                            <p:commandButton value="Сохранить" action="#{adminDriver.createDriver()}" update="growl,availableVehicles" />
                         </f:facet>  
                     </p:panelGrid>
                 </p:dialog>
@@ -49,29 +37,17 @@
 
                 <p:commandButton value ="Добавить" onclick="createDialog.show()" /> <br/>
 
-                <p:dataTable id="availableVehicles" value="#{adminTCO.tcoList}"  var="tco" style="border: none" emptyMessage="Нет данных" >  
-                    <p:column headerText="Номер АТ" >  
-                        <h:outputLabel value="#{tco.atId}" />                                    
-                    </p:column>  
-                    <p:column headerText="ГРЗ">  
-                        <h:outputLabel  value="#{tco.stateNumber}" />                                    
-                    </p:column>  
-                    <p:column headerText="Марка">  
-                        <h:outputLabel  value="#{tco.mark}" />                                    
-                    </p:column>  
-                    <p:column headerText="Модель">  
-                        <h:outputLabel  value="#{tco.model}" />                                    
-                    </p:column>  
-                    <p:column headerText="Грузоподъемность">  
-                        <h:outputLabel  value="#{tco.weight}" />                                    
-                    </p:column>  
+                <p:dataTable id="availableVehicles" value="#{adminDriver.driversList }"  var="driver" style="border: none" emptyMessage="Нет данных" >  
+                    <p:column headerText="Ф.И.О." >  
+                        <h:outputLabel value="#{driver.name }" />                                    
+                    </p:column>                      
                     <p:column headerText="Действия" rendered="false" >  
-                        <p:confirmDialog appendToBody="true" id="confirmDialog" message="Вы действительно хотите удалить ОТК #{adminTCO.selectedTco}?" widgetVar="confirmation" header="Подтверждение">
-                            <p:commandButton value="Да" action="#{adminTCO.removeTco(adminTCO.selectedTco)}" onclick="confirmation.hide()" />
+                        <p:confirmDialog appendToBody="true" id="confirmDialog" message="Вы действительно хотите удалить водителя #{adminDriver.selectedDriver}?" widgetVar="confirmation" header="Подтверждение">
+                            <p:commandButton value="Да" action="#{adminDriver.removeDriver(adminDriver.selectedDriver)}" onclick="confirmation.hide()" />
                             <p:commandButton value="Нет" onclick="confirmation.hide()" />
                         </p:confirmDialog>
                         <p:commandButton value="Удалить" oncomplete="confirmation.show()" update=":form:display" >
-                            <f:setPropertyActionListener value="#{tco}" target="#{adminTCO.selectedTco}" /> 
+                            <f:setPropertyActionListener value="#{driver}" target="#{adminDriver.selectedDriver}" /> 
                         </p:commandButton>
                     </p:column>  
                 </p:dataTable>  
