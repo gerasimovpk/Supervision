@@ -20,3 +20,7 @@
 /Enterprise/Enterprise-ejb/build/
 /Enterprise/Enterprise-war/build/
 /Enterprise/Enterprise-war/dist/
+/Supervision/Supervision-war/build/
+/Supervision/build/
+/Supervision/Supervision-ejb/dist/
+/Supervision/Supervision-war/dist/

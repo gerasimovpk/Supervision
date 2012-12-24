@@ -102,7 +102,7 @@ function init() {
 				numZoomLevels : 20
 			});
 
-	 OpenLayers.ProxyHost = "../../proxy.jsp?targetUrl=";
+	 OpenLayers.ProxyHost = "../../proxy.jsp?";
 
 	filter = new OpenLayers.Filter.Comparison({
 		type : OpenLayers.Filter.Comparison.EQUAL_TO,
@@ -117,10 +117,10 @@ function init() {
 		strategies : [ new OpenLayers.Strategy.Fixed(), saveStrategy,
 				filterStrategy ],
 		protocol : new OpenLayers.Protocol.WFS({
-			url : "localhost:8080/geoserver/wfs",
+			url : "http://localhost:8080/geoserver/wfs",
 			featureType : "UserObjects",
-			featurePrefix : "RSUBD",
-			featureNS : "http://rsubd.isim.ru",
+			featurePrefix : "rsubd",
+			featureNS : "http://isim.vlsu.ru/rsubd",
 			srsName : "EPSG:4326",
 			geometryName : "THE_GEOM",
 			version : "1.1.0"
@@ -131,9 +131,7 @@ function init() {
 				selectControl.select(feature);
 		},
 		styleMap : new OpenLayers.StyleMap({
-			'default' : defaultFeatureStyle
-			/*'select' : editingStyle,
-			'temporary' : editingStyle*/
+			'default' : userObjectStyle
 		})
 	});
 	editableLayer.events.register("beforefeatureremoved", '', function(obj) {
@@ -208,7 +206,7 @@ function init() {
 			});
 
 	var save = new OpenLayers.Control.Button({
-		title : "Сохранить объект",
+		title : "Save features",
 		displayClass : "olControlSaveFeature",
 		trigger : function() {
 
@@ -221,10 +219,6 @@ function init() {
 				//edit.layer.features[i].attributes.DISPATCHER_NAME = document.getElementById('DispathcerName').value;
 			}
 			saveStrategy.save();
-			// editableLayer.removeAllFeatures();
-//			var objectIDS = ObjectId.toString();
-//			saveServer(objectIDS);
-			setObjecId(ObjectId);
 		}
 	});
 
@@ -308,7 +302,7 @@ function init() {
 function setObjectId(rid) {
 	ObjectId = rid ? rid : (new Date()).getTime();
 	filter.value = rid ? rid : null;
-	setObjectIdServer(ObjectId);
+	
 	filterStrategy.setFilter(filter);
 }
 

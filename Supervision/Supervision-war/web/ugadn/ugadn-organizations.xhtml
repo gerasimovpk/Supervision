@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./ugadn.xhtml">
+
+            <ui:define name="center">
+                <h2>Организации</h2>                                    
+
+                <p:growl id="growl" showDetail="true"  />  
+
+                <p:dialog id="createDialog" style="z-index: 10000000"  widgetVar="createDialog" header="Добавить организацию" >
+                    <p:ajax event="close" update="createDialog" />
+
+                    <p:panelGrid columns="2" style="border: 0" >  
+
+                        <h:outputLabel for="title" value="Название:" />  
+                        <p:inputText id="title" value="#{ ugadnOrg.title  }" requiredMessage="Введите название"/>  
+
+                        <f:facet name="footer">  
+                            <p:commandButton value="Сохранить" action="#{ ugadnOrg.createOrg() }" update="growl,availableOrgs" />
+                        </f:facet>  
+                    </p:panelGrid>
+                </p:dialog>
+
+
+                <p:commandButton value ="Добавить" onclick="createDialog.show()" /> <br/>
+
+                <p:dataTable id="availableOrgs" value="#{ ugadnOrg.orgList }"  var="org" style="border: none" emptyMessage="Нет данных" >  
+
+                    <p:column headerText="ID" >  
+                        <h:outputLabel value="#{org.organizationId }" />                                    
+                    </p:column>                      
+
+                    <p:column headerText="Название" >  
+                        <h:outputLabel value="#{org.title }" />                                    
+                    </p:column>                      
+
+                </p:dataTable>  
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
