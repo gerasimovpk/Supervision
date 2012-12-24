@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"    
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./dispatcher.xhtml">
+
+        <ui:define name="head">
+            <script src="http://www.openlayers.org/api/OpenLayers.js" type="text/javascript"/> 
+            <script src="../resources/scripts/map.js" type="text/javascript"/> 
+            <meta name="view/port" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <script type="text/javascript">
+                function start(){
+                    init(37.62,55.75,13);
+                }
+                window.onload = start; 
+            </script>
+        </ui:define>
+
+        <ui:define name="center">
+            <h:form>
+                <table border="0px" style="padding:10px; width: 100%">
+                    <tr>
+                        <td width="75%">
+                            <div id="basicMap" style="height: 600px;"
+                                 />
+                        </td>
+                        <td valign="top">
+                            <p:panel header="Список ОТК" >
+                                <p:dataTable id="tcoList" var="tco" value="#{dispatcherOIM.tcoList}"
+                                             paginator="true"
+                                             selectionMode="single"
+                                             rowKey="#{tco.stateNumber}"         
+                                             widgetVar="table" 
+                                             >  
+
+
+                                    <p:column headerText="Гос.номер" >  
+                                        <h:outputText value="#{tco.stateNumber}" />     
+                                    </p:column>  
+
+                                    <p:column headerText="Марка" >  
+                                        <h:outputText value="#{tco.mark}" />     
+                                    </p:column>  
+
+                                    <!--                                    <p:column headerText="Местоположение" >  
+                                                                            <h:outputText value="#{otc.at.currentPlacement}" />     
+                                                                        </p:column>  -->
+
+                                    <!--                                    <p:column headerText="" >  
+                                                                            <p:commandButton icon="ui-icon-search" onclick="addMarker(#{otc.at.currentLon}, #{otc.at.currentLat}, 'http://orange.gps-trace.com/avl_icon/get/274387/32/0.png', '#{otc.ts.stateNumber}', { stateNumber: '#{otc.ts.stateNumber}',description: '#{otc.ts.mark} '+'#{otc.ts.model}'});centerAt(#{otc.at.currentLon}, #{otc.at.currentLat})"/>     
+                                                                        </p:column>  -->
+                                </p:dataTable>
+                            </p:panel>
+                        </td>
+                    </tr>
+
+                </table>
+            </h:form> 
+        </ui:define>
+    </ui:composition>
+</html>

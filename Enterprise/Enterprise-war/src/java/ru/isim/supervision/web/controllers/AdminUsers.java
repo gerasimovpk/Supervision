@@ -14,6 +14,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 import ru.isim.enterprise.rsubd.entities.Users;
+import ru.isim.enterprise.rsubd.entities.Roles;
+import ru.isim.enterprise.rsubd.facades.RolesFacadeLocal;
 import ru.isim.enterprise.rsubd.facades.UsersFacadeLocal;
 import ru.isim.enterprise.rsubd.facades.UsersFacadeLocal;
 
@@ -34,15 +36,27 @@ public class AdminUsers {
     @PostConstruct
     public void construct() {
         usersList = UserFacade.findAll();
+        rolesList = RolesFacade.findAll();
     }
     private List<Users> usersList = new ArrayList<Users>();
+    private List<Roles> rolesList = new ArrayList<Roles>();
     @EJB
     private UsersFacadeLocal UserFacade;
+    @EJB
+    private RolesFacadeLocal RolesFacade;
     private String name;
     private Users selectedUser;
     private String username;
     private String password;
     private String role;
+
+    public List<Roles> getRolesList() {
+        return rolesList;
+    }
+
+    public void setRolesList(List<Roles> rolesList) {
+        this.rolesList = rolesList;
+    }
 
     public String getRole() {
         return role;
@@ -99,17 +113,17 @@ public class AdminUsers {
         user.setName(name);
         user.setUsername(username);
         user.setPassword(password);
-        user.setRole(role);
+        user.setRole(RolesFacade.findbyName(role));
 
         FacesContext context = FacesContext.getCurrentInstance();
 
-        try {
-            UserFacade.create(user);
-            context.addMessage(null, new FacesMessage("Сохранение", "Пользователь \"" + this.name + "\" успешно сохранен"));
-            usersList = UserFacade.findAll();
-        } catch (Exception e) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка", "Произошла ошибка сервера при сохранении пользователя"));
-        }
+//        try {
+        UserFacade.create(user);
+        context.addMessage(null, new FacesMessage("Сохранение", "Пользователь \"" + this.name + "\" успешно сохранен"));
+        usersList = UserFacade.findAll();
+//        } catch (Exception e) {
+//            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка", "Произошла ошибка сервера при сохранении пользователя"));
+//        }
     }
 
     public void removeUser(Users User) {

@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="../masterTemplate.xhtml">
+
+            <ui:define name="head">
+                <title> Диспетчер КПОГ </title>
+                <ui:insert name="headInfo" >
+                    info
+                </ui:insert>
+            </ui:define>
+
+            <ui:define name="left">
+                <p:menu  >
+                    <p:submenu label="Оперативная информация">
+                        <p:menuitem value="Карта" action="./dispatcher-oim.xhtml" ajax="false"/>
+                    </p:submenu>    
+                    <p:submenu label="Перевозки">
+                        <p:menuitem value="Список" action="./dispatcher-list.xhtml" ajax="false"/>
+                        <p:menuitem value="Статистика" action="./dispatcher-statisitcs.xhtml" ajax="false"/>
+                        <p:menuitem value="Создать перевозку" action="./dispatcher-createTrip.xhtml" ajax="false"/>
+                        <p:menuitem value="Доступные спец.разрешения" action="./dispatcher-SPList.xhtml" ajax="false"/>
+                    </p:submenu>    
+                    <p:submenu label="Инфраструктура" style="display: none" >
+                        <p:menuitem value="Пользовательские объекты" action="./dispatcher-objectEditor.xhtml" ajax="false"/>
+                    </p:submenu>    
+                </p:menu>
+            </ui:define>
+
+            <ui:define name="center">
+                <ui:insert name="center" >
+                    This fullPage layout consists of five different layoutUnits which are resizable and closable by default.
+                </ui:insert>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

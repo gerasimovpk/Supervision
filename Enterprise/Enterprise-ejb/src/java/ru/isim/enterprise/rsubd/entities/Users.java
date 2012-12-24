@@ -5,7 +5,6 @@
 package ru.isim.enterprise.rsubd.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,9 +24,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name"),
     @NamedQuery(name = "Users.findByUserId", query = "SELECT u FROM Users u WHERE u.userId = :userId")})
 public class Users implements Serializable {
-    @Size(max = 255)
-    @Column(name = "ROLE")
-    private String role;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -41,9 +37,12 @@ public class Users implements Serializable {
     @Size(max = 255)
     @Column(name = "NAME")
     private String name;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Size(max = 7)
     @Column(name = "USER_ID")
-    private BigDecimal userId;
+    private String userId;
+    @JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID")
+    @ManyToOne
+    private Roles role;
 
     public Users() {
     }
@@ -76,12 +75,20 @@ public class Users implements Serializable {
         this.name = name;
     }
 
-    public BigDecimal getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(BigDecimal userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
     }
 
     @Override
@@ -107,14 +114,6 @@ public class Users implements Serializable {
     @Override
     public String toString() {
         return "ru.isim.enterprise.rsubd.entities.Users[ username=" + username + " ]";
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
     
 }

@@ -1,0 +1,195 @@
+.customEditingToolbar {
+	float: right;
+	right: 0px;
+	height: 30px;
+	width: 550px;	
+}
+
+.customEditingToolbar div {
+	float: right;
+	margin: 5px;
+	width: 24px;
+	height: 24px;
+}
+
+
+.olControlDrawPolygonItemInactive {
+	background-image: url("../img/geo/draw_polygon_off.png");
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+
+.olControlDrawPolygonItemActive {
+	background-image: url("../img/geo/draw_polygon_on.png");
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+
+.olControlDrawFeatureCircleItemInactive {
+	background-image: url("../img/geo/draw_circle_off.png");
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+
+.olControlDrawFeatureCircleItemActive {
+	background-image: url("../img/geo/draw_circle_on.png");
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+.olControlPanItemInactive {
+	background-image: url("../img/geo/pan_off.png");
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+
+.olControlPanItemActive {
+	background-image: url("../img/geo/pan_on.png");
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlDrawFeaturePathItemInactive {
+	background-image: url("../img/geo/draw_line_off.png");
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlDrawFeaturePathItemActive {
+	background-image: url("../img/geo/draw_line_on.png");
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlDrawPointItemInactive {
+	background-image: url("../img/geo/add_point_off.png");
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlDrawPointItemActive {
+	background-image: url("../img/geo/add_point_on.png");
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlModifyFeatureItemActive {
+	background-image: url(../img/geo/edit_on.png);
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlModifyFeatureItemInactive {
+	background-image: url(../img/geo/edit_off.png);
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlReshapeFeatureItemActive {
+	background-image: url(../img/geo/reshape_on.png);
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlReshapeFeatureItemInactive {
+	background-image: url(../img/geo/reshape_off.png);
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlDeleteFeatureItemActive {
+	background-image: url(../img/geo/delete_on.png);
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlDeleteFeatureItemInactive {
+	background-image: url(../img/geo/delete_off.png);
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlSaveFeatureItemActive {
+	background-image: url(../img/geo/save_features_on.png);
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlSaveFeatureItemInactive {
+	background-image: url(../img/geo/save_features_off.png);
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlSelDeleteItemActive {
+	background-image: url(../img/geo/sel_delete_on.png);
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlSelDeleteItemInactive {
+	background-image: url(../img/geo/sel_delete_off.png);
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlSelectItemActive {
+	background-image: url(../img/geo/select_on.png);
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+.olControlSelectItemInactive {
+	background-image: url(../img/geo/select_off.png);
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+}
+
+div.olControlAttribution {
+	font-family: Verdana;
+	font-size: 0.7em;
+	font-weight: bold;
+	bottom: 15px;
+	text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+}
+
+div.olControlScaleLineTop {
+	text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+}
+
+div.olControlScaleLineBottom {
+	text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+}
+
+div.olControlMousePosition {
+	font-family: Verdana;
+	font-size: 0.85em;
+	font-weight: bold;
+	bottom: 15px;
+	text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+}
+
+#text {
+	font-family: Verdana;
+	font-weight: bold;
+	line-height: 1;
+	font-size: 0.7em;
+	position: absolute;
+	top: 17.5em;
+	left: 4em;
+	width: 50px;
+	z-index: 20000;
+	padding: 0 0.5em 0.5em 0.5em;
+	text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+}
+
+A {
+	color: #483D8B;
+}
+
+A:visited {
+	color: #483D8B;
+}
+
+A:active {
+	color: #483D8B;
+}

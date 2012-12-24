@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"    
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./dispatcher.xhtml">
+
+        <ui:define name="center">
+            <h:form>
+                <p:panel header="Список переозок" >
+                    <p:dataTable id="tripsList" var="wb" value="#{dispatcherTrips.waybills}"
+                                 paginator="true"
+                                 selectionMode="single"
+                                 widgetVar="table" 
+                                 emptyMessage="Нет данных"
+                                 >  
+
+                        <p:column headerText="Гос.номер" >  
+                            <h:outputText value="#{wb.tco.stateNumber }" />     
+                        </p:column>  
+
+                        <p:column headerText="Марка" >  
+                            <h:outputText value="#{wb.tco.mark}" />     
+                        </p:column>  
+
+                        <p:column headerText="Водитель" >  
+                            <h:outputText value="#{wb.driver.name}" />     
+                        </p:column>  
+
+
+                        <p:column headerText="Статус" >  
+                            <h:outputText value="#{wb.status == 1 ? 'На контроле' : wb.status == 2 ?'Завершена' : 'Не определен'}" />     
+                        </p:column>  
+                        
+                        <p:column headerText="Действия" >  
+                            <p:commandButton value="Подробнее"  />
+                            <p:commandButton value="Завершить" rendered="#{wb.status == 1}" action="" />
+                        </p:column>  
+
+
+                    </p:dataTable>
+                </p:panel>
+
+
+            </h:form> 
+        </ui:define>
+    </ui:composition>
+</html>

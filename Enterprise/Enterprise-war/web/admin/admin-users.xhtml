@@ -22,7 +22,7 @@
 
                 <p:dialog id="createDialog" style="z-index: 10000000"  widgetVar="createDialog" header="Добавить водителя" >
                     <p:ajax event="close" update="createDialog" />
-                    
+
                     <p:panelGrid columns="2" style="border: 0" >  
 
                         <h:outputLabel for="login" value="Логин:" />  
@@ -35,7 +35,11 @@
                         <p:inputText id="name" value="#{adminUsers.name}" requiredMessage="Не заполнены Ф.И.О."/>  
 
                         <h:outputLabel for="role" value="Роль:" />  
-                        <p:inputText id="role" value="#{adminUsers.role}" requiredMessage="Не заполнена роль"/>  
+<!--                        <p:inputText id="role" value="#{adminUsers.role}" requiredMessage="Не заполнена роль"/>  -->
+                        <p:selectOneMenu id ="role" value="#{adminUsers.role}" effect="fade">  
+                            <f:selectItems value="#{adminUsers.rolesList}" var="role" itemLabel="#{role.roleName}" itemValue="#{role.roleName}"/>  
+                        </p:selectOneMenu> 
+
 
                         <f:facet name="footer">  
                             <p:commandButton value="Сохранить" action="#{adminUsers.createUser()}" update="growl,availableUsers" />
@@ -47,23 +51,23 @@
                 <p:commandButton value ="Добавить" onclick="createDialog.show()" /> <br/>
 
                 <p:dataTable id="availableUsers" value="#{adminUsers.usersList }"  var="user" style="border: none" emptyMessage="Нет данных" >  
-                    
+
                     <p:column headerText="Логин" >  
                         <h:outputLabel value="#{user.username}" />                                    
                     </p:column>                      
-                    
+
                     <p:column headerText="Пароль" >  
                         <h:outputLabel value="#{user.password}" />                                    
                     </p:column>                      
-                    
+
                     <p:column headerText="Ф.И.О." >  
                         <h:outputLabel value="#{user.name}" />                                    
                     </p:column>      
-                    
+
                     <p:column headerText="Роль" >  
-                        <h:outputLabel value="#{user.role}" />                                    
+                        <h:outputLabel value="#{user.role.roleName}" />                                    
                     </p:column>      
-                    
+
                     <p:column headerText="Действия" rendered="false" >  
                         <p:confirmDialog appendToBody="true" id="confirmDialog" message="Вы действительно хотите удалить пользователя #{adminUsers.selectedUser}?" widgetVar="confirmation" header="Подтверждение">
                             <p:commandButton value="Да" action="#{adminUsers.removeUser(adminUsers.selectedUser)}" onclick="confirmation.hide()" />
