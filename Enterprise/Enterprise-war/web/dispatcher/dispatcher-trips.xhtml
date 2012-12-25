@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./dispatcher.xhtml">
+
+            <ui:define name="center">
+                <h2>Перевозки</h2>                                    
+
+                <p:growl id="growl" showDetail="true"  />  
+
+
+                <p:dialog id="createDialog" style="z-index: 10000000"  widgetVar="createDialog" header="Создать перевозку" >
+                    <p:ajax event="close" update="createDialog" />
+
+                    <p:panelGrid columns="2" style="border: 0" >  
+
+                        <h:outputLabel for="tco" value="Транспортное средство" />  
+                        <p:selectOneMenu value="#{dispatcherTrips.stateNumber}"  if="tco" effect="fade">  
+                            <f:selectItems value="#{dispatcherTrips.vehicles}" var="tco" itemLabel="#{tco.stateNumber}" itemValue="#{tco.stateNumber}"/>  
+                        </p:selectOneMenu>  
+
+                        <h:outputLabel for="dr" value="Водитель" />  
+                        <p:selectOneMenu value="#{dispatcherTrips.driverId}"  if="dr" effect="fade">  
+                            <f:selectItems value="#{dispatcherTrips.drivers}" var="dr" itemLabel="#{dr.name}" itemValue="#{dr.driverId}"/>  
+                        </p:selectOneMenu>  
+
+                        <h:outputLabel for="sp" value="Спец. разрешение" />  
+                        <p:selectOneMenu value="#{dispatcherTrips.sp}"  if="sp" effect="fade">  
+                            <f:selectItems value="#{dispatcherTrips.SPList}" var="sp" itemLabel="#{sp.startDate.toLocaleString()}" itemValue="#{sp.spId}"/>  
+                        </p:selectOneMenu>  
+
+                       
+
+
+                        <f:facet name="footer">  
+                            <p:commandButton value="Сохранить" action="${dispatcherTrips.createTrip()}"  update="growl,trips" />
+                        </f:facet>  
+                    </p:panelGrid>
+                </p:dialog>
+
+
+                <p:commandButton value ="Добавить" onclick="createDialog.show()" /> <br/>
+
+                <p:dataTable id="trips" value="#{dispatcherTrips.waybills}"  var="wb" style="border: none" emptyMessage="Нет данных" >  
+                    <p:column headerText="ОТК" >  
+                        <h:outputText value="#{wb.tco.stateNumber }" />     
+                    </p:column>  
+
+                    <p:column headerText="Водитель" >  
+                        <h:outputText value="#{wb.driver.name}" />     
+                    </p:column>  
+
+                    <p:column headerText="Статус" >  
+                        <h:outputText value="#{wb.status == 1 ? 'На контроле' : wb.status == 2 ? 'Завершен' : 'Не определен' }" />
+                    </p:column>  
+                   
+
+                </p:dataTable>  
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

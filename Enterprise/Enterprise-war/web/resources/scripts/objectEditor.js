@@ -77,12 +77,8 @@ function init() {
 	RSUBDMap = new OpenLayers.Map("basicMap", {
 		controls : [ new OpenLayers.Control.Navigation(),
 				new OpenLayers.Control.PanZoomBar(),
-				new OpenLayers.Control.ScaleLine(),
 				new OpenLayers.Control.DragFeature(),
-				new OpenLayers.Control.LayerSwitcher(),
-				new OpenLayers.Control.Attribution(),
-				new OpenLayers.Control.MousePosition(),
-				new OpenLayers.Control.OverviewMap() ],
+				new OpenLayers.Control.MousePosition()],
 		projection : WGS84,
 		displayProjection : WGS84
 	});
@@ -93,14 +89,8 @@ function init() {
 
 	// base layers
 	var openstreetmap = new OpenLayers.Layer.OSM();
-	var google_maps = new OpenLayers.Layer.Google("Google Maps", {
-		numZoomLevels : 20
-	});
-	var google_satellite = new OpenLayers.Layer.Google(
-			"Google Sattelite", {
-				type : google.maps.MapTypeId.SATELLITE,
-				numZoomLevels : 20
-			});
+	
+        
 
 	 OpenLayers.ProxyHost = "../../proxy.jsp?";
 
@@ -121,7 +111,6 @@ function init() {
 			featureType : "UserObjects",
 			featurePrefix : "rsubd",
 			featureNS : "http://isim.vlsu.ru/rsubd",
-			srsName : "EPSG:4326",
 			geometryName : "THE_GEOM",
 			version : "1.1.0"
 		}),
@@ -131,7 +120,7 @@ function init() {
 				selectControl.select(feature);
 		},
 		styleMap : new OpenLayers.StyleMap({
-			'default' : userObjectStyle
+			'default' : userEditObjectsStyle
 		})
 	});
 	editableLayer.events.register("beforefeatureremoved", '', function(obj) {
@@ -143,8 +132,7 @@ function init() {
 		obj.feature.attributes.OBJECT_ID = ObjectId;
 	});
 
-	RSUBDMap.addLayers([ openstreetmap, google_maps, google_satellite,
-			editableLayer ]);
+	RSUBDMap.addLayers([ openstreetmap, editableLayer ]);
 	// RSUBDMap.zoomToExtent(mapextent);
 	RSUBDMap.zoomTo(9);
 

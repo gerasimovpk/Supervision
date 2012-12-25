@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"    
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="./dispatcher.xhtml">
+
+        <ui:define name="center">
+            <p:panelGrid columns="2" style="border: 0" >  
+
+                <h:outputLabel for="tco" value="ТС:" />  
+                <p:inputText id="tco" value="#{adminTCO.atId}" requiredMessage="Не заполнен код АТ"/>  
+ 
+                <h:outputLabel for="driver" value="Водитель" />  
+                <p:inputText id="driver" value="" requiredMessage="Не заполнен код АТ"/>  
+ 
+                <h:outputLabel for="fuelgiven" value="Топлива выдано:" />  
+                <p:inputText id="fuelgiven" value="" requiredMessage="Не заполнен код АТ"/>  
+ 
+                
+                <f:facet name="footer">  
+                    <p:commandButton value="Создать" action="" update="growl,availableVehicles" />
+                </f:facet>  
+            </p:panelGrid>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -41,13 +41,10 @@ function init() {
 
     // Initialize the RSUBDMap
     RSUBDMap = new OpenLayers.Map("basicMap", {
-        controls : [ new OpenLayers.Control.Navigation(),
+       controls : [ new OpenLayers.Control.Navigation(),
         new OpenLayers.Control.PanZoomBar(),
-        new OpenLayers.Control.ScaleLine(),
         new OpenLayers.Control.DragFeature(),
-        new OpenLayers.Control.LayerSwitcher(),
-        new OpenLayers.Control.OverviewMap(),
-        new OpenLayers.Control.MousePosition() ],
+        new OpenLayers.Control.MousePosition()],
         projection : WGS84,
         displayProjection : WGS84
     });
