@@ -4,6 +4,8 @@
  */
 package ru.isim.supervision.ugadn.facades;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,6 +17,7 @@ import ru.isim.supervision.ugadn.entities.SpecialPermits;
  */
 @Stateless
 public class SpecialPermitsFacade extends AbstractFacade<SpecialPermits> implements SpecialPermitsFacadeLocal {
+
     @PersistenceContext(unitName = "Supervision-ejbPU")
     private EntityManager em;
 
@@ -26,5 +29,8 @@ public class SpecialPermitsFacade extends AbstractFacade<SpecialPermits> impleme
     public SpecialPermitsFacade() {
         super(SpecialPermits.class);
     }
-    
+
+    public List<SpecialPermits> findByOrganization(Integer orgID) {
+        return em.createNamedQuery("SpecialPermits.findByOrgId").setParameter("orgId", orgID).getResultList();
+    }
 }

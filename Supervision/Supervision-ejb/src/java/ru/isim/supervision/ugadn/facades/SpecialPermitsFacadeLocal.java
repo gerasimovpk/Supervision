@@ -23,10 +23,11 @@ public interface SpecialPermitsFacadeLocal {
 
     SpecialPermits find(Object id);
 
+    List<SpecialPermits> findByOrganization(Integer orgID);
+
     List<SpecialPermits> findAll();
 
     List<SpecialPermits> findRange(int[] range);
 
     int count();
-    
 }

@@ -19,14 +19,35 @@
 
                 <p:dialog id="createDialog" style="z-index: 10000000"  widgetVar="createDialog" header="Добавить спец.разрешение" >
                     <p:ajax event="close" update="createDialog" />
-                    
+
                     <p:panelGrid columns="2" style="border: 0" >  
 
-                        <h:outputLabel for="name" value="Организация:" />  
-                        <p:inputText id="name" value="#{ugadnSP.orgList}" requiredMessage="Не заполнены Ф.И.О."/>  
+                        <h:outputLabel for="org" value="Организация:" />  
+                        <p:selectOneMenu value="#{ugadnSP.orgId}"  if="org" effect="fade">  
+                            <f:selectItems value="#{ugadnSP.orgList}" var="org" itemLabel="#{org.title}" itemValue="#{org.organizationId}"/>  
+                        </p:selectOneMenu>  
+
+                        <h:outputLabel for="startDate" value="Дата начала" />  
+                        <p:calendar value="#{ugadnSP.start}" id="startDate" required="true" requiredMessage="Выберите дату начала"/>
+
+                        <h:outputLabel for="finishDate" value="Дата окончания" />  
+                        <p:calendar value="#{ugadnSP.finish}" id="finishDate" required="true" requiredMessage="Выберите дату окончания"/>
+
+                        <h:outputLabel for="tripsCount" value="Количество поездок" />  
+                        <p:inputText value="#{ugadnSP.tripsCount}" id="tripsCount" required="true" requiredMessage="Укажите количество поездок"/>
+
+                        <h:outputLabel for="name" value="Тип груза:" />  
+                        <p:selectOneMenu value="#{ugadnSP.cargoTypeId}" effect="fade">  
+                            <f:selectItems value="#{ugadnSP.cargoTypes}" var="cargo" itemLabel="#{cargo.title}" itemValue="#{cargo.code}"/>  
+                        </p:selectOneMenu>  
+
+                        
+                         <h:outputLabel for="routeDescr" value="Описание маршрута" />  
+                         <p:inputTextarea value="#{ugadnSP.routeDescription }" id="routeDescr" required="true" requiredMessage="Введите описание маршрута"/>
+
 
                         <f:facet name="footer">  
-                            <p:commandButton value="Сохранить" action="#{adminDriver.createDriver()}" update="growl,availableDrivers" />
+                            <p:commandButton value="Сохранить" action="${ugadnSP.createOrg()}"  update="growl,SPList" />
                         </f:facet>  
                     </p:panelGrid>
                 </p:dialog>
@@ -34,19 +55,31 @@
 
                 <p:commandButton value ="Добавить" onclick="createDialog.show()" /> <br/>
 
-                <p:dataTable id="availableDrivers" value="#{adminDriver.driversList }"  var="driver" style="border: none" emptyMessage="Нет данных" >  
-                    <p:column headerText="Ф.И.О." >  
-                        <h:outputLabel value="#{driver.name }" />                                    
-                    </p:column>                      
-                    <p:column headerText="Действия" rendered="false" >  
-                        <p:confirmDialog appendToBody="true" id="confirmDialog" message="Вы действительно хотите удалить водителя #{adminDriver.selectedDriver}?" widgetVar="confirmation" header="Подтверждение">
-                            <p:commandButton value="Да" action="#{adminDriver.removeDriver(adminDriver.selectedDriver)}" onclick="confirmation.hide()" />
-                            <p:commandButton value="Нет" onclick="confirmation.hide()" />
-                        </p:confirmDialog>
-                        <p:commandButton value="Удалить" oncomplete="confirmation.show()" update=":form:display" >
-                            <f:setPropertyActionListener value="#{driver}" target="#{adminDriver.selectedDriver}" /> 
-                        </p:commandButton>
+                <p:dataTable id="SPList" value="#{ugadnSP.SPList}"  var="sp" style="border: none" emptyMessage="Нет данных" >  
+                    <p:column headerText="Организация" >  
+                        <h:outputText value="#{sp.organiztionId.title }" />     
                     </p:column>  
+
+                    <p:column headerText="Начало срока действия" >  
+                        <h:outputText value="#{sp.startDate.toLocaleString()}" />     
+                    </p:column>  
+
+                    <p:column headerText="Окончание срока действия" >  
+                        <h:outputText value="#{sp.finishDate.toLocaleString()}" />     
+                    </p:column>  
+
+                    <p:column headerText="Допустимый тип груза" >  
+                        <h:outputText value="#{sp.cargoType.title}" />     
+                    </p:column>  
+
+                    <p:column headerText="Количество поездок" >  
+                        <h:outputText value="#{sp.tripsCount}" />     
+                    </p:column>  
+
+                    <p:column headerText="Описание маршрута" >  
+                        <h:outputText value="#{sp.routeDescription}" />     
+                    </p:column>  
+
                 </p:dataTable>  
             </ui:define>
 

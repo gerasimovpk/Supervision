@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "SpecialPermits.findAll", query = "SELECT s FROM SpecialPermits s"),
+    @NamedQuery(name = "SpecialPermits.findByOrgId", query = "SELECT s FROM SpecialPermits s WHERE s.organiztionId.organizationId = :orgId"),
     @NamedQuery(name = "SpecialPermits.findBySpId", query = "SELECT s FROM SpecialPermits s WHERE s.spId = :spId"),
     @NamedQuery(name = "SpecialPermits.findByRouteDescription", query = "SELECT s FROM SpecialPermits s WHERE s.routeDescription = :routeDescription"),
     @NamedQuery(name = "SpecialPermits.findByStartDate", query = "SELECT s FROM SpecialPermits s WHERE s.startDate = :startDate"),
@@ -54,7 +55,7 @@ public class SpecialPermits implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "TRIPS_COUNT")
     private BigDecimal tripsCount;
-    @JoinColumn(name = "ORGANIZTION_ID ", referencedColumnName = "ORGANIZATION_ID")
+    @JoinColumn(name = "ORGANIZATION_ID ", referencedColumnName = "ORGANIZATION_ID")
     @ManyToOne(optional = false)
     private Organizations organiztionId;
     @JoinColumn(name = "CARGO_TYPE", referencedColumnName = "CODE")
